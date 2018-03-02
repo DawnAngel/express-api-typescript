@@ -1,9 +1,8 @@
 import { Request, Response, Router } from 'express';
 
-import Post from '@app/models/Post';
+import Post from '../../models/Post';
 
-export class PostRouter {
-
+class PostRouter {
   public router: Router;
 
   constructor() {
@@ -99,9 +98,8 @@ export class PostRouter {
     this.router.put('/:slug', this.update);
     this.router.delete('/:slug', this.delete);
   }
-
 }
 
-const postRoutes = new PostRouter();
+const routes = new PostRouter();
 
-export default postRoutes.router;
+export const postRouter = routes.router;

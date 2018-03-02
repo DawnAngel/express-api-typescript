@@ -1,9 +1,8 @@
 import { Request, Response, Router } from 'express';
 
-import User from '@app/models/User';
+import User from '../../models/User';
 
 class UserRouter {
-
   public router: Router;
 
   constructor() {
@@ -12,7 +11,6 @@ class UserRouter {
   }
 
   public all(req: Request, res: Response): void {
-
     User.find()
       .then((data) => {
         res.status(200).json({data});
@@ -94,9 +92,8 @@ class UserRouter {
     this.router.put('/:username', this.update);
     this.router.delete('/:username', this.delete);
   }
-
 }
 
-const userRoutes = new UserRouter();
+const routes = new UserRouter();
 
-export default userRoutes.router;
+export const userRouter = routes.router;

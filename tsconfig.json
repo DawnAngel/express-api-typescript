@@ -3,11 +3,7 @@
     "outDir": "./build/",
     "module": "commonjs",
     "target": "es5",
-    "sourceMap": true,
-    "baseUrl": "src",
-    "paths": {
-      "@app/*": ["*"]
-    }
+    "sourceMap": true
   },
   "include": [
     "./src/**/*"

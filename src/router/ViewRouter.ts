@@ -1,9 +1,7 @@
 import { Router } from 'express';
-// import PostRouter from './view/PostRouter';
-// import UserRouter from './view/UserRouter';
+import { baseRouter } from './view/BaseRouter';
 
 class ViewRouter {
-
   public router: Router;
 
   constructor() {
@@ -12,13 +10,10 @@ class ViewRouter {
   }
 
   public routes() {
-    // this.router.use('/', IndexRouter);
-    // this.router.use('/posts', PostRouter);
-    // this.router.use('/users', UserRouter);
+    this.router.use('/', baseRouter);
   }
-
 }
 
-const viewRoutes = new ViewRouter();
+const routes = new ViewRouter();
 
-export default viewRoutes.router;
+export const viewRouter = routes.router;

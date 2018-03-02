@@ -5,9 +5,14 @@
   "author": "Eric Pinto",
   "license": "GPL-3.0",
   "scripts": {
+    "ts:build": "tsc",
     "ts:watch": "tsc -w",
-    "start": "node ./build/index.js",
-    "serve": "tsc && nodemon ./build/index.js"
+    "static:build": "cpx \"src/views/**/*.ejs\" build/views",
+    "static:watch": "cpx \"src/views/**/*.ejs\" build/views -w",
+    "node:run": "node ./build/index.js",
+    "node:watch": "nodemon ./build/index.js",
+    "start": "yarn static:build && yarn ts:build && yarn node:run",
+    "serve": "yarn static:watch & yarn ts:watch & yarn node:watch"
   },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
@@ -33,6 +38,7 @@
     "@types/node": "8.5.5",
     "nodemon": "1.14.7",
     "tslint": "5.8.0",
+    "cpx": "^1.5.0",
     "typescript": "2.6.2"
   }
 }

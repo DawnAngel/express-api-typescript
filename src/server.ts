@@ -6,11 +6,12 @@ import * as express from 'express';
 import * as helmet from 'helmet';
 import * as mongoose from 'mongoose';
 import * as logger from 'morgan';
-import ApiRouter from './router/ApiRouter';
-import ViewRouter from '@app/router/ViewRouter';
+import * as ejs from 'ejs';
+
+import { apiRouter }from './router/ApiRouter';
+import { viewRouter } from './router/ViewRouter';
 
 class Server {
-
   // set app to be of type express.Application
   public app: express.Application;
 
@@ -27,7 +28,9 @@ class Server {
     mongoose.connect(MONGO_URI || process.env.MONGODB_URI);
 
     // express view engine
+    this.app.engine('ejs', ejs.renderFile);
     this.app.set('view engine', 'ejs');
+    this.app.set('views', __dirname + '/views');
 
     // express middleware
     this.app.use(bodyParser.urlencoded({ extended: true }));
@@ -51,8 +54,8 @@ class Server {
 
   // application routes
   public routes(): void {
-    this.app.use('/', ViewRouter);
-    this.app.use('/api/v1', ApiRouter);
+    this.app.use('/', viewRouter);
+    this.app.use('/api/v1', apiRouter);
   }
 }
 

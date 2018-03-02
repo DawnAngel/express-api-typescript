@@ -1,23 +1,22 @@
 import { Router } from 'express';
-import PostRouter from './api/PostRouter';
-import UserRouter from './api/UserRouter';
+import { postRouter } from './api/PostRouter';
+import { userRouter } from './api/UserRouter';
 
 class ApiRouter {
-
   public router: Router;
 
   constructor() {
     this.router = Router();
     this.routes();
   }
+
   // set up our routes
   public routes() {
-    this.router.use('/posts', PostRouter);
-    this.router.use('/users', UserRouter);
+    this.router.use('/posts', postRouter);
+    this.router.use('/users', userRouter);
   }
-
 }
 
-const apiRoutes = new ApiRouter();
+const routes = new ApiRouter();
 
-export default apiRoutes.router;
+export const apiRouter = routes.router;
